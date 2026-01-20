@@ -3,8 +3,6 @@ const responseBox = document.querySelector("[data-response]");
 const statusText = document.querySelector("[data-status]");
 const saveButton = document.querySelector("[data-save]");
 const clearButton = document.querySelector("[data-clear]");
-const debugBox = document.querySelector("[data-debug]");
-const debugPanel = document.querySelector("[data-debug-panel]");
 
 const DEFAULT_MODEL = "LGAI-EXAONE/K-EXAONE-236B-A23B";
 const DEFAULT_ENDPOINT = "https://api.friendli.ai/v1/chat/completions";
@@ -31,11 +29,6 @@ if (storedModel) {
 const updateStatus = (message) => {
   if (!statusText) return;
   statusText.textContent = message;
-};
-
-const updateDebug = (message) => {
-  if (!debugBox) return;
-  debugBox.textContent = message;
 };
 
 const setResponse = (message) => {
@@ -94,12 +87,7 @@ const callFriendli = async ({ endpoint, apiKey, model, temperature, prompt, mode
 
   if (!response.ok) {
     const errorText = await response.text();
-    const error = new Error(`API 오류 (${response.status}): ${errorText}`);
-    error.status = response.status;
-    error.body = errorText;
-    error.endpoint = endpoint;
-    error.payload = payload;
-    throw error;
+    throw new Error(`API 오류 (${response.status}): ${errorText}`);
   }
 
   const data = await response.json();
@@ -118,39 +106,23 @@ const handleSubmit = async (event) => {
   const endpoint = form.querySelector("#api-endpoint")?.value.trim() || DEFAULT_ENDPOINT;
   const model = form.querySelector("#model")?.value.trim() || DEFAULT_MODEL;
   const prompt = form.querySelector("#prompt")?.value.trim();
-  const temperatureInput = Number(form.querySelector("#temperature")?.value || 0.7);
-  const temperature = Math.min(1, Math.max(0, temperatureInput));
+  const temperature = Number(form.querySelector("#temperature")?.value || 0.7);
   const mode = document.body.dataset.mode;
   const option = form.querySelector("#option")?.value || "기본";
-  const maskedKey = apiKey ? `${apiKey.slice(0, 4)}...${apiKey.slice(-4)}` : "없음";
 
   if (!prompt) {
     updateStatus("프롬프트를 입력해주세요.");
-    updateDebug("입력된 프롬프트가 없습니다. 프롬프트를 추가한 뒤 다시 시도해주세요.");
     return;
   }
 
   setResponse("응답을 생성하는 중...");
   updateStatus("요청을 전송했습니다.");
-  updateDebug(
-    [
-      `요청 모드: ${mode}`,
-      `엔드포인트: ${endpoint}`,
-      `모델: ${model}`,
-      `온도: ${temperature}`,
-      `옵션: ${option}`,
-      `API 키: ${maskedKey}`,
-      `프롬프트 길이: ${prompt.length}자`,
-      `타임스탬프: ${new Date().toLocaleString()}`,
-    ].join("\n")
-  );
 
   try {
     if (!apiKey) {
       const demo = mockAnswer(mode, prompt);
       setResponse(demo);
       updateStatus("API 키가 없어 데모 응답을 보여드렸어요.");
-      updateDebug(`${debugBox?.textContent}\n\n데모 모드로 응답을 생성했습니다.`);
       return;
     }
 
@@ -165,23 +137,9 @@ const handleSubmit = async (event) => {
     });
     setResponse(result);
     updateStatus("응답 수신 완료!");
-    updateDebug(`${debugBox?.textContent}\n\n응답 길이: ${result.length}자`);
   } catch (error) {
     setResponse("오류가 발생했습니다. 입력값을 확인해주세요.");
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    if (error?.status === 404) {
-      updateStatus("API 경로를 찾지 못했습니다. 엔드포인트 URL을 확인해주세요.");
-    } else {
-      updateStatus(errorMessage);
-    }
-    const payloadPreview = error?.payload
-      ? `\n요청 페이로드: ${JSON.stringify(error.payload, null, 2)}`
-      : "";
-    updateDebug(
-      `${debugBox?.textContent}\n\n오류 발생: ${errorMessage}\n상태 코드: ${
-        error?.status ?? "알 수 없음"
-      }\n엔드포인트: ${error?.endpoint ?? "알 수 없음"}${payloadPreview}`
-    );
+    updateStatus(error instanceof Error ? error.message : String(error));
   }
 };
 
@@ -201,7 +159,6 @@ const handleSave = () => {
     localStorage.setItem("friendli_api_model", model);
   }
   updateStatus("설정이 저장되었습니다.");
-  updateDebug("설정 저장: API 키/엔드포인트/모델 정보를 로컬 스토리지에 저장했습니다.");
 };
 
 const handleClear = () => {
@@ -215,7 +172,6 @@ const handleClear = () => {
   if (endpointInput) endpointInput.value = DEFAULT_ENDPOINT;
   if (modelInput) modelInput.value = DEFAULT_MODEL;
   updateStatus("저장된 설정을 초기화했습니다.");
-  updateDebug("저장된 설정을 모두 초기화했습니다.");
 };
 
 if (form) {
@@ -228,14 +184,4 @@ if (saveButton) {
 
 if (clearButton) {
   clearButton.addEventListener("click", handleClear);
-}
-
-if (form && debugPanel) {
-  const debugToggle = form.querySelector("#debug");
-  if (debugToggle) {
-    debugPanel.hidden = !debugToggle.checked;
-    debugToggle.addEventListener("change", () => {
-      debugPanel.hidden = !debugToggle.checked;
-    });
-  }
 }

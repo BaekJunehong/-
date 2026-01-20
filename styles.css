@@ -241,38 +241,11 @@ textarea {
   margin-top: 10px;
 }
 
-.inline-actions input[type="checkbox"] {
-  width: auto;
-  margin: 0;
-}
-
 .tag {
   display: inline-block;
   padding: 6px 10px;
   background: rgba(109, 107, 255, 0.15);
   border-radius: 999px;
-  font-size: 13px;
-  color: var(--muted);
-}
-
-.debug-panel {
-  margin-top: 16px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  border: 1px solid var(--border);
-  background: rgba(15, 23, 42, 0.4);
-}
-
-.debug-panel summary {
-  cursor: pointer;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.debug-output {
-  margin: 0;
-  white-space: pre-wrap;
-  font-family: "SUIT", system-ui, sans-serif;
   font-size: 13px;
   color: var(--muted);
 }
