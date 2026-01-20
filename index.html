@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXAONE 체험 스테이션</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="nav">
+        <div class="logo">EXAONE 체험 스테이션</div>
+        <div class="nav-links">
+          <a href="index.html" aria-current="page">홈</a>
+          <a href="prompt-lab.html">프롬프트 실험실</a>
+          <a href="summary-lab.html">요약 실험실</a>
+          <a href="translation-lab.html">번역 실험실</a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <h1>FriendliAI + EXAONE 체험을 한 곳에서</h1>
+        <p>
+          무료로 제공되는 FriendliAI API와 Hugging Face의
+          <strong>LGAI-EXAONE/K-EXAONE-236B-A23B</strong> 모델을 기반으로 다양한 체험을 진행해보세요.
+          각 버튼은 별도의 체험 페이지로 연결됩니다.
+        </p>
+        <div class="hero-actions">
+          <a class="primary" href="prompt-lab.html">프롬프트 바로 입력하기</a>
+          <a class="secondary" href="summary-lab.html">요약 체험 해보기</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="intro">
+        <h2>EXAONE 체험 구성</h2>
+        <p>
+          EXAONE의 성능을 빠르게 확인할 수 있도록 실험 목적별 페이지를 구성했습니다.
+          각 페이지에서 API 키를 입력하면 실제 FriendliAI API 호출로 결과를 확인할 수 있고,
+          키가 없다면 로컬 데모 응답으로 흐름을 테스트할 수 있습니다.
+        </p>
+      </section>
+
+      <section class="grid">
+        <article class="card">
+          <h3>프롬프트 실험실</h3>
+          <p>
+            원하는 프롬프트를 자유롭게 입력해 EXAONE의 창의적인 응답, 지식 수준, 문체를 확인합니다.
+          </p>
+          <ul>
+            <li>모델/토큰/온도 설정</li>
+            <li>API 키 저장 및 재사용</li>
+            <li>직접 프롬프트 입력 지원</li>
+          </ul>
+          <a class="button" href="prompt-lab.html">프롬프트 체험하기</a>
+        </article>
+        <article class="card">
+          <h3>요약 실험실</h3>
+          <p>긴 텍스트를 입력해 핵심 요약, 키포인트 추출 능력을 확인합니다.</p>
+          <ul>
+            <li>기사/보고서 요약</li>
+            <li>핵심 키워드 추출</li>
+            <li>요약 길이 옵션</li>
+          </ul>
+          <a class="button" href="summary-lab.html">요약 체험하기</a>
+        </article>
+        <article class="card">
+          <h3>번역 실험실</h3>
+          <p>한/영 번역을 통해 EXAONE의 자연스러운 문장 변환 능력을 확인합니다.</p>
+          <ul>
+            <li>한글 → 영어 변환</li>
+            <li>용어 유지 옵션</li>
+            <li>톤 조절 가이드</li>
+          </ul>
+          <a class="button" href="translation-lab.html">번역 체험하기</a>
+        </article>
+      </section>
+
+      <section class="cta">
+        <div>
+          <h2>추가 체험 아이디어</h2>
+          <p>
+            프롬프트/요약/번역 외에도 코드 리뷰, 마케팅 카피 생성, 데이터 설명 등 다양한 미션으로 확장할 수 있습니다.
+            필요한 체험을 알려주시면 페이지를 계속 확장할 수 있도록 설계했습니다.
+          </p>
+        </div>
+        <a class="primary" href="prompt-lab.html">바로 체험 시작</a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>© 2025 EXAONE Experience. GitHub Pages 배포용 템플릿.</p>
+    </footer>
+  </body>
+</html>
