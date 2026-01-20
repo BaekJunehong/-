@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EXAONE 프롬프트 실험실</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body data-mode="prompt">
+    <header class="hero">
+      <nav class="nav">
+        <div class="logo">EXAONE 체험 스테이션</div>
+        <div class="nav-links">
+          <a href="index.html">홈</a>
+          <a href="prompt-lab.html" aria-current="page">프롬프트 실험실</a>
+          <a href="summary-lab.html">요약 실험실</a>
+          <a href="translation-lab.html">번역 실험실</a>
+        </div>
+      </nav>
+      <div class="hero-content">
+        <h1>프롬프트 실험실</h1>
+        <p>
+          EXAONE의 자유로운 답변 생성 능력을 확인하는 공간입니다. 프롬프트를 입력하고 API 키를
+          추가하면 바로 응답을 확인할 수 있습니다.
+        </p>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="lab-layout">
+        <section class="panel">
+          <h2>설정 & 프롬프트 입력</h2>
+          <form data-lab-form>
+            <label for="api-key">FriendliAI API 키</label>
+            <input id="api-key" name="api-key" type="password" placeholder="friendli_..." />
+            <p class="hint">API 키가 없으면 데모 응답이 표시됩니다.</p>
+
+            <label for="api-endpoint">API 엔드포인트</label>
+            <input
+              id="api-endpoint"
+              name="api-endpoint"
+              type="text"
+              value="https://api.friendli.ai/v1/chat/completions"
+            />
+
+            <label for="model">모델</label>
+            <input id="model" name="model" type="text" value="LGAI-EXAONE/K-EXAONE-236B-A23B" />
+
+            <label for="temperature">온도 (0~1)</label>
+            <input id="temperature" name="temperature" type="number" min="0" max="1" step="0.1" value="0.7" />
+
+            <label for="prompt">프롬프트</label>
+            <textarea id="prompt" name="prompt" placeholder="예: EXAONE의 강점을 3가지로 요약해줘."></textarea>
+
+            <label for="debug">디버그 모드</label>
+            <div class="inline-actions">
+              <input id="debug" name="debug" type="checkbox" />
+              <span class="hint">요청/응답 정보를 확인하려면 체크하세요.</span>
+            </div>
+
+            <div class="inline-actions">
+              <button class="primary" type="submit">응답 생성</button>
+              <button class="secondary" type="button" data-save>설정 저장</button>
+              <button class="secondary" type="button" data-clear>설정 초기화</button>
+            </div>
+            <p class="status" data-status>API 키 저장은 브라우저 로컬에만 보관됩니다.</p>
+          </form>
+        </section>
+
+        <section class="panel">
+          <h2>응답 결과</h2>
+          <div class="response-box" data-response>응답이 여기에 표시됩니다.</div>
+          <div class="status">Tip: 프롬프트에 역할이나 톤을 명확히 적으면 더 안정적인 결과를 얻을 수 있어요.</div>
+          <div class="inline-actions">
+            <span class="tag">프롬프트 자유 입력</span>
+            <span class="tag">온도 조절</span>
+            <span class="tag">실시간 응답</span>
+          </div>
+          <details class="debug-panel" data-debug-panel hidden>
+            <summary>디버깅 로그</summary>
+            <pre class="debug-output" data-debug>디버깅 정보가 여기에 표시됩니다.</pre>
+          </details>
+        </section>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <p>EXAONE 프롬프트 실험실 · GitHub Pages</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
