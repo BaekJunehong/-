@@ -52,12 +52,6 @@
             <label for="prompt">프롬프트</label>
             <textarea id="prompt" name="prompt" placeholder="예: EXAONE의 강점을 3가지로 요약해줘."></textarea>
 
-            <label for="debug">디버그 모드</label>
-            <div class="inline-actions">
-              <input id="debug" name="debug" type="checkbox" />
-              <span class="hint">요청/응답 정보를 확인하려면 체크하세요.</span>
-            </div>
-
             <div class="inline-actions">
               <button class="primary" type="submit">응답 생성</button>
               <button class="secondary" type="button" data-save>설정 저장</button>
@@ -76,10 +70,6 @@
             <span class="tag">온도 조절</span>
             <span class="tag">실시간 응답</span>
           </div>
-          <details class="debug-panel" data-debug-panel hidden>
-            <summary>디버깅 로그</summary>
-            <pre class="debug-output" data-debug>디버깅 정보가 여기에 표시됩니다.</pre>
-          </details>
         </section>
       </div>
     </main>
